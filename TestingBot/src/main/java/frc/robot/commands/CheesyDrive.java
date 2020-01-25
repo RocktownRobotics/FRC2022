@@ -29,33 +29,45 @@ public class CheesyDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftStickX = Robot.m_oi.GetDriverRawAxis(Constants.XBOX_LS_X);
-    double rightStickY = -Robot.m_oi.GetDriverRawAxis(Constants.XBOX_RS_Y);
+    double leftStickY = Robot.m_oi.GetDriverRawAxis(Constants.XBOX_LS_Y);
+    double rightStickX = Robot.m_oi.GetDriverRawAxis(Constants.XBOX_RS_X);
 
-    double power = rightStickY;
-    double turningFactor = leftStickX;
+    double power = leftStickY;
+    double turningFactor = rightStickX;
 
-    double leftMotorPower=1;
-    double rightMotorPower=1;
+    double leftMotorPower=0;
+    double rightMotorPower=0;
   
     //If the controller wants to go a direction, it slows down that motor's side.
 
-    if(turningFactor<0){
-      leftMotorPower+=turningFactor;
-    }else if(turningFactor>0){
-      rightMotorPower-=turningFactor;
+    // if(turningFactor<0){
+    //   leftMotorPower+=turningFactor;
+    // }else if(turningFactor>0){
+    //   rightMotorPower-=turningFactor;
+    // }
+
+    // //Multiplies the motor power by the original power to scale the speed.
+    // leftMotorPower*=power;
+    // rightMotorPower*=power;
+
+    // if(power==0){
+    //   if(turningFactor!=0){
+    //     leftMotorPower=turningFactor;
+    //     rightMotorPower=-turningFactor;
+    //   }
+    // }
+
+    // Carlo's idea
+    
+    if (Math.abs(leftStickY) > 0.1 || Math.abs(rightStickX) > 0.1) {
+      leftMotorPower = leftStickY - rightStickX / 2;
+      rightMotorPower = leftStickY + rightStickX / 2;
+      leftMotorPower = leftMotorPower / Math.max(leftMotorPower, rightMotorPower);
+      rightMotorPower = rightMotorPower / Math.max(leftMotorPower, rightMotorPower);
+    } else {
+      leftMotorPower = 0;
+      rightMotorPower = 0;
     }
-
-    //Multiplies the motor power by the original power to scale the speed.
-    leftMotorPower*=power;
-    rightMotorPower*=power;
-
-
-        // Carlo's idea
-    // leftMotorPower = leftstickX - rightstickY / 2
-    // rightMotorPower = leftstickX + rightstickY / 2
-    // leftMotorPower = leftMotorPower / Math.max(leftMotorPower, rightMotorPower)
-    // rightMotorPower = rightMotorPower / Math.max(leftMotorPower, rightMotorPower)
 
 
 
