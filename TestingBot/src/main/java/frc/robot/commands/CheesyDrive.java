@@ -17,7 +17,7 @@ public class CheesyDrive extends CommandBase {
    */
   public CheesyDrive() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.driveTrain);
+    addRequirements(Robot.m_driveTrain);
 
   }
 
@@ -30,36 +30,46 @@ public class CheesyDrive extends CommandBase {
   @Override
   public void execute() {
     double leftStickX = Robot.m_oi.GetDriverRawAxis(Constants.XBOX_LS_X);
-    double rightStickY = Robot.m_oi.GetDriverRawAxis(Constants.XBOX_RS_Y);
+    double rightStickY = -Robot.m_oi.GetDriverRawAxis(Constants.XBOX_RS_Y);
 
     double power = rightStickY;
     double turningFactor = leftStickX;
 
-    double leftMotorPower=0;
-    double rightMotorPower=0;
-
+    double leftMotorPower=1;
+    double rightMotorPower=1;
   
     //If the controller wants to go a direction, it slows down that motor's side.
 
+    if(turningFactor<0){
+      leftMotorPower+=turningFactor;
+    }else if(turningFactor>0){
+      rightMotorPower-=turningFactor;
+    }
 
     //Multiplies the motor power by the original power to scale the speed.
     leftMotorPower*=power;
     rightMotorPower*=power;
 
-    // Carlo's idea
+    if(leftMotorPower>1||leftMotorPower<-1||rightMotorPower>1||rightMotorPower<-1){
+      leftMotorPower=0;
+      rightMotorPower=0;
+    }
+        // Carlo's idea
     // leftMotorPower = leftstickX - rightstickY / 2
     // rightMotorPower = leftstickX + rightstickY / 2
     // leftMotorPower = leftMotorPower / Math.max(leftMotorPower, rightMotorPower)
     // rightMotorPower = rightMotorPower / Math.max(leftMotorPower, rightMotorPower)
 
-    if(leftMotorPower>1||leftMotorPower<-1||rightMotorPower>1||rightMotorPower<-1){
-      leftMotorPower=0;
-      rightMotorPower=0;
-    }
+
+
+
+
+
+
 
     //Sets the motors to the speed
-    Robot.driveTrain.setLeftMotors(leftMotorPower);
-    Robot.driveTrain.setRightMotors(rightMotorPower);
+    Robot.m_driveTrain.setLeftMotors(leftMotorPower);
+    Robot.m_driveTrain.setRightMotors(rightMotorPower);
 
   }
 
@@ -67,8 +77,8 @@ public class CheesyDrive extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.driveTrain.setLeftMotors(0);
-    Robot.driveTrain.setRightMotors(0);
+    Robot.m_driveTrain.setLeftMotors(0);
+    Robot.m_driveTrain.setRightMotors(0);
   }
 
   // Returns true when the command should end.

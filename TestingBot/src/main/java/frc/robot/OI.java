@@ -8,6 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.ExtendPneumatic;
+import frc.robot.commands.RetractPneumatic;
 
 /**
  * Add your docs here.
@@ -15,6 +17,8 @@ import edu.wpi.first.wpilibj.XboxController;
 public class OI {
 
     private XboxController driverController = new XboxController(Constants.XBOX_PORT);
+
+
 
     public double GetDriverRawAxis(int axis){
         return -driverController.getRawAxis(axis);
@@ -27,4 +31,14 @@ public class OI {
     public boolean isButtonReleased(int button){
         return driverController.getRawButtonReleased(button);
     }
-}
+
+    public OI(){
+        if(isButtonPressed(Constants.XBOX_BA)){
+            new ExtendPneumatic();
+        }
+        if(isButtonPressed(Constants.XBOX_BB)){
+            new RetractPneumatic();
+        }
+
+        }
+    }

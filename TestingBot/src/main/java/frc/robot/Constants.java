@@ -32,6 +32,11 @@ public final class Constants {
 	public static final int XBOX_RS_Y = 5;
 
 	public static final int XBOX_BX = 3;
+	public static final int XBOX_BA = 1;
+	public static final int XBOX_BB = 2;
 
 	public static final int SHOOTER_ID = 7;
+
+	public static final int SOLENOID_DEPLOY = 0;
+	public static final int SOLENOID_RETRACT = 1;
 }

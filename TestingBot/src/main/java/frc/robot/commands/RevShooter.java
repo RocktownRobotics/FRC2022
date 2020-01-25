@@ -17,7 +17,7 @@ public class RevShooter extends CommandBase {
    */
   public RevShooter() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.shooter);
+    addRequirements(Robot.m_shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +30,7 @@ public class RevShooter extends CommandBase {
   @Override
   public void execute() {
     if(Robot.m_oi.isButtonPressed(Constants.XBOX_BX)){
-      Robot.shooter.ShooterSpeed(1);
+      Robot.m_shooter.ShooterSpeed(1);
     }
     if(Robot.m_oi.isButtonReleased(Constants.XBOX_BX)){
       end(true);
@@ -41,7 +41,7 @@ public class RevShooter extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.shooter.ShooterSpeed(0);
+    Robot.m_shooter.ShooterSpeed(0);
   }
 
   // Returns true when the command should end.
