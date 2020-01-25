@@ -46,6 +46,12 @@ public class CheesyDrive extends CommandBase {
     leftMotorPower*=power;
     rightMotorPower*=power;
 
+    // Carlo's idea
+    // leftMotorPower = leftstickX - rightstickY / 2
+    // rightMotorPower = leftstickX + rightstickY / 2
+    // leftMotorPower = leftMotorPower / Math.max(leftMotorPower, rightMotorPower)
+    // rightMotorPower = rightMotorPower / Math.max(leftMotorPower, rightMotorPower)
+
     if(leftMotorPower>1||leftMotorPower<-1||rightMotorPower>1||rightMotorPower<-1){
       leftMotorPower=0;
       rightMotorPower=0;
