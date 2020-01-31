@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -30,46 +31,34 @@ public class CheesyDrive extends CommandBase {
   @Override
   public void execute() {
     double leftStickY = Robot.m_oi.GetDriverRawAxis(Constants.XBOX_LS_Y);
-    double rightStickX = Robot.m_oi.GetDriverRawAxis(Constants.XBOX_RS_X);
+    double rightStickX = -Robot.m_oi.GetDriverRawAxis(Constants.XBOX_RS_X);
 
     double power = leftStickY;
     double turningFactor = rightStickX;
 
-    double leftMotorPower=0;
-    double rightMotorPower=0;
+    double leftMotorPower=1;
+    double rightMotorPower=1;
   
     //If the controller wants to go a direction, it slows down that motor's side.
 
-    // if(turningFactor<0){
-    //   leftMotorPower+=turningFactor;
-    // }else if(turningFactor>0){
-    //   rightMotorPower-=turningFactor;
-    // }
+     if(turningFactor<0){
+       leftMotorPower+=turningFactor;
+     }else if(turningFactor>0){
+       rightMotorPower-=turningFactor;
+     }
 
-    // //Multiplies the motor power by the original power to scale the speed.
-    // leftMotorPower*=power;
-    // rightMotorPower*=power;
+     //Multiplies the motor power by the original power to scale the speed.
 
-    // if(power==0){
-    //   if(turningFactor!=0){
-    //     leftMotorPower=turningFactor;
-    //     rightMotorPower=-turningFactor;
-    //   }
-    // }
-
-    // Carlo's idea
+     leftMotorPower*=power;
+     rightMotorPower*=power;
     
-    if (Math.abs(leftStickY) > 0.1 || Math.abs(rightStickX) > 0.1) {
-      leftMotorPower = leftStickY - rightStickX / 2;
-      rightMotorPower = leftStickY + rightStickX / 2;
-      leftMotorPower = leftMotorPower / Math.max(leftMotorPower, rightMotorPower);
-      rightMotorPower = rightMotorPower / Math.max(leftMotorPower, rightMotorPower);
-    } else {
-      leftMotorPower = 0;
-      rightMotorPower = 0;
-    }
 
+     if(power==0){
 
+         leftMotorPower=turningFactor;
+         rightMotorPower=-turningFactor;
+       
+     }
 
 
 
@@ -78,6 +67,8 @@ public class CheesyDrive extends CommandBase {
       rightMotorPower=0;
     }
 
+    SmartDashboard.putNumber("Left Motor Power",leftMotorPower);
+    SmartDashboard.putNumber("Right Motor Power",rightMotorPower);
 
     //Sets the motors to the speed
     Robot.m_driveTrain.setLeftMotors(leftMotorPower);

@@ -5,28 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
-
-
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class RevShooter extends CommandBase {
+public class SwitchGear extends CommandBase {
   /**
-   * Creates a new RevShooter.
+   * Creates a new SwitchGear.
    */
-  public RevShooter() {
+  public SwitchGear() {
     // Use addRequirements() here to declare subsystem dependencies.
-    //addRequirements(Robot.m_shooter);
+    addRequirements(Robot.m_gearBox);
   }
-
+  private boolean gearState = false;
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    this.gearState=false;
 
   }
 
@@ -34,23 +31,19 @@ public class RevShooter extends CommandBase {
   @Override
   public void execute() {
     if(Robot.m_oi.isButtonPressed(Constants.XBOX_BX)){
-     // Robot.m_shooter.ShooterSpeed(1);
-    }
-    if(Robot.m_oi.isButtonReleased(Constants.XBOX_BX)){
-      end(true);
+      Robot.m_gearBox.changeGear(!gearState);
+      gearState=!gearState;
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //Robot.m_shooter.ShooterSpeed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-     return false;
+    return false;
   }
 }
-

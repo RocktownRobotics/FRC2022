@@ -7,33 +7,33 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.ControlPneumatics;
+import frc.robot.Constants;
+import frc.robot.commands.SwitchGear;
 
-
-public class Pneumatic extends SubsystemBase {
+public class GearBox extends SubsystemBase {
   /**
-   * Creates a new Pneumatic.
+   * Creates a new GearBox.
    */
-  DoubleSolenoid dSolenoid = new DoubleSolenoid(0,1);
 
-  public Pneumatic() {
+   //this solenoid is actually the gearbox
+  private Solenoid gearbox = new Solenoid(Constants.GEARBOX_PORT);
 
-  }
+   
 
-  public void extendSolenoid(){
-    dSolenoid.set(Value.kForward);
-  }
-  
-  public void retractSolenoid(){
-    dSolenoid.set(Value.kForward);
+  public void changeGear(boolean gearState){
+    gearbox.set(!gearState);
+
+    }
+    
+  public GearBox() {
+
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    setDefaultCommand(new ControlPneumatics());
+    setDefaultCommand(new SwitchGear());
   }
 }

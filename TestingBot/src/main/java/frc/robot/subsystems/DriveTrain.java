@@ -15,7 +15,9 @@ import frc.robot.Constants;
 import frc.robot.commands.CheesyDrive;
 
 public class DriveTrain extends SubsystemBase {
-
+  /**
+   * Creates a new DriveTrain.
+   */
 
   private TalonSRX motorLF = new TalonSRX(Constants.MOTOR_LF_ID);
   private TalonSRX motorLM = new TalonSRX(Constants.MOTOR_LM_ID);
@@ -23,9 +25,8 @@ public class DriveTrain extends SubsystemBase {
   private TalonSRX motorRF = new TalonSRX(Constants.MOTOR_RF_ID);
   private TalonSRX motorRM = new TalonSRX(Constants.MOTOR_RM_ID);
   private TalonSRX motorRR = new TalonSRX(Constants.MOTOR_RR_ID);
-  /**
-   * Creates a new DriveTrain.
-   */
+  //Encoder driveEncoder = new Encoder(Constants.DRIVETRAIN_ENCODER_A,Constants.DRIVETRAIN_ENCODER_B);
+
 
   public void setLeftMotors(double speed){
     motorLF.set(ControlMode.PercentOutput, -speed);
@@ -38,7 +39,20 @@ public class DriveTrain extends SubsystemBase {
     motorRM.set(ControlMode.PercentOutput, speed);
     motorRR.set(ControlMode.PercentOutput, speed);
   }
+/* 
+  public double getDriveEncoderCount() {
+		return driveEncoder.get();
+  }
+  
+  public void resetDriveEncoderCount() {
+		driveEncoder.reset();
+	}
 
+	public double getDriveEncoderDistance() {
+		double driveEncoderCountsPerFoot = 1;
+		return (getDriveEncoderCount() / (driveEncoderCountsPerFoot)) * 12;
+	}
+*/
   public DriveTrain() {
 
   }

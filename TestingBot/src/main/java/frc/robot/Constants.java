@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -31,12 +32,24 @@ public final class Constants {
 	public static final int XBOX_RS_X = 4;
 	public static final int XBOX_RS_Y = 5;
 
+	/*
+	X - Shoots
+	A - extend pnematic
+	B - retract pneumatic
+	
+	*/
+
 	public static final int XBOX_BX = 3;
 	public static final int XBOX_BA = 1;
 	public static final int XBOX_BB = 2;
 
 	public static final int SHOOTER_ID = 7;
 
-	public static final int SOLENOID_DEPLOY = 0;
-	public static final int SOLENOID_RETRACT = 1;
+	public static final int GEARBOX_PORT = 2;
+
+	//public static final int SOLENOID_DEPLOY = null;
+	//public static final int SOLENOID_RETRACT = null;
+
+	public static final int DRIVETRAIN_ENCODER_A = 0;
+	public static final int DRIVETRAIN_ENCODER_B = 1;
 }
