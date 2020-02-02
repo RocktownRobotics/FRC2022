@@ -30,8 +30,8 @@ public class CheesyDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftStickY = Robot.m_oi.GetDriverRawAxis(Constants.XBOX_LS_Y);
-    double rightStickX = -Robot.m_oi.GetDriverRawAxis(Constants.XBOX_RS_X);
+    double leftStickY = Robot.m_oi.GetDriverRawAxis(Constants.XBOX_LS_Y, true);
+    double rightStickX = -Robot.m_oi.GetDriverRawAxis(Constants.XBOX_RS_X, true);
 
     double power = leftStickY;
     double turningFactor = rightStickX;

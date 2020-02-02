@@ -15,22 +15,33 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
 
-    private XboxController driverController = new XboxController(Constants.XBOX_PORT);
+    private XboxController driverController = new XboxController(Constants.XBOX_DRIVER_PORT);
+    private XboxController shooterController = new XboxController(Constants.XBOX_SHOOTER_PORT);
 
 
 
-    public double GetDriverRawAxis(int axis){
-        return -driverController.getRawAxis(axis);
+    public double GetDriverRawAxis(int axis, boolean driver){
+        if(driver){
+            return -driverController.getRawAxis(axis);
+        }else{
+            return -shooterController.getRawAxis(axis);
+        }
     }
 
-    public boolean isButtonPressed(int button){
-        return driverController.getRawButtonPressed(button);
+    public boolean isButtonPressed(int button, boolean driver){
+        if(driver){
+            return driverController.getRawButtonPressed(button);
+        }else{
+            return shooterController.getRawButtonPressed(button);
+        }
     }
 
-    public boolean isButtonReleased(int button){
+    public boolean isButtonReleased(int button, boolean driver){
+        if(driver){
         return driverController.getRawButtonReleased(button);
+        }
+        return shooterController.getRawButtonReleased(button);
     }
+}
 
    
-
-}

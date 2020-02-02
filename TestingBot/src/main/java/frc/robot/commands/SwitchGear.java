@@ -30,9 +30,9 @@ public class SwitchGear extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.m_oi.isButtonPressed(Constants.XBOX_BX)){
-      Robot.m_gearBox.changeGear(!gearState);
-      gearState=!gearState;
+    if(Robot.m_oi.isButtonPressed(Constants.XBOX_BA, true)){
+      //Robot.m_gearBox.changeGear(!gearState);
+      //gearState=!gearState;
     }
   }
 

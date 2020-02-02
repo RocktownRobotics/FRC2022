@@ -18,14 +18,22 @@ package frc.robot;
  */
 public final class Constants {
 
+
+	// "Robot Map"
 	public static final int MOTOR_LF_ID = 3;
-	public static final int MOTOR_LM_ID = 2;
-	public static final int MOTOR_LR_ID = 1;
+	public static final int MOTOR_LM_ID = 8;
+	public static final int MOTOR_LR_ID = 7;
 	public static final int MOTOR_RF_ID = 6;
 	public static final int MOTOR_RM_ID = 5;
 	public static final int MOTOR_RR_ID = 4;
 
-	public static final int XBOX_PORT = 0;
+	public static final int XBOX_DRIVER_PORT = 2;
+	public static final int XBOX_SHOOTER_PORT = 0;
+
+//7 and 8
+	public static final int SHOOTER1_PORT = 1;
+	public static final int SHOOTER2_PORT = 2;
+
 
 	public static final int XBOX_LS_X = 0;
 	public static final int XBOX_LS_Y = 1;
@@ -43,13 +51,20 @@ public final class Constants {
 	public static final int XBOX_BA = 1;
 	public static final int XBOX_BB = 2;
 
-	public static final int SHOOTER_ID = 7;
-
 	public static final int GEARBOX_PORT = 2;
 
-	//public static final int SOLENOID_DEPLOY = null;
-	//public static final int SOLENOID_RETRACT = null;
+	public static final int SOLENOID_DEPLOY = 0;
+	public static final int SOLENOID_RETRACT = 1;
 
 	public static final int DRIVETRAIN_ENCODER_A = 0;
 	public static final int DRIVETRAIN_ENCODER_B = 1;
+
+
+
+	// Constants
+	public static final double SHOOTER_SPEED=.85;
+	public static final int KTIMEOUTMS = 0;
+	public static final int SHOOTER_STRIPES = 0;
+	public static final double PD_P = .8;
+	public static final double PD_D = .05;
 }

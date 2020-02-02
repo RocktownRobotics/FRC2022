@@ -28,9 +28,10 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   public static DriveTrain m_driveTrain = new DriveTrain();
-  //public static Shooter m_shooter = new Shooter();
+  public static Shooter m_shooter = new Shooter();
   public static Pneumatic m_pneumatic = new Pneumatic();
   public static GearBox m_gearBox = new GearBox();
+  
  
   public static OI m_oi;
   /**

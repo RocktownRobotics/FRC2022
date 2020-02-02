@@ -21,7 +21,7 @@ public class ControlPneumatics extends CommandBase {
     addRequirements(Robot.m_pneumatic);
   }
 
-private boolean isDeployed = false;
+private boolean isDeployed;
 
   // Called when the command is initially scheduled.
   @Override
@@ -33,7 +33,7 @@ private boolean isDeployed = false;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.m_oi.isButtonPressed(Constants.XBOX_BA)){
+    if(Robot.m_oi.isButtonPressed(Constants.XBOX_BA,false)){
       if(!isDeployed){
         SmartDashboard.putBoolean("Pneumatic deployed:", isDeployed);
         Robot.m_pneumatic.extendSolenoid();
@@ -43,12 +43,14 @@ private boolean isDeployed = false;
         Robot.m_pneumatic.retractSolenoid();
         this.isDeployed=false;       
       }
+    }else{
+      //Robot.m_pneumatic.stopSolenoid();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
   }
 
   // Returns true when the command should end.

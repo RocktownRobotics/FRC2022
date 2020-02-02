@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.commands.ControlPneumatics;
 
 
@@ -17,7 +18,7 @@ public class Pneumatic extends SubsystemBase {
   /**
    * Creates a new Pneumatic.
    */
-  DoubleSolenoid dSolenoid = new DoubleSolenoid(0,1);
+  DoubleSolenoid dSolenoid = new DoubleSolenoid(Constants.SOLENOID_DEPLOY,Constants.SOLENOID_RETRACT);
 
   public Pneumatic() {
 
@@ -28,7 +29,10 @@ public class Pneumatic extends SubsystemBase {
   }
   
   public void retractSolenoid(){
-    dSolenoid.set(Value.kForward);
+    dSolenoid.set(Value.kReverse);
+  }
+  public void stopSolenoid(){
+    dSolenoid.set(Value.kOff);
   }
 
   @Override
