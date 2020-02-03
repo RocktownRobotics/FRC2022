@@ -15,6 +15,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.GearBox;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Pneumatic;
+import frc.robot.subsystems.TestSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
   public static Shooter m_shooter = new Shooter();
   public static Pneumatic m_pneumatic = new Pneumatic();
   public static GearBox m_gearBox = new GearBox();
+  public static TestSubsystem m_testSubSystem = new TestSubsystem();
   
  
   public static OI m_oi;

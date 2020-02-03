@@ -62,7 +62,7 @@ public final class Constants {
 
 
 	// Constants
-	public static final double SHOOTER_SPEED=.85;
+	public static final double SHOOTER_SPEED=.60; //.88 for distance
 	public static final int KTIMEOUTMS = 0;
 	public static final int SHOOTER_STRIPES = 0;
 	public static final double PD_P = .8;

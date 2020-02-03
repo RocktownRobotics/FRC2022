@@ -5,64 +5,38 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+package frc.robot.commands.AutomationCommands;
 
-
-
-
-package frc.robot.commands;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class RevShooter extends CommandBase {
+public class AlignTargetXAxis extends CommandBase {
   /**
-   * Creates a new RevShooter.
+   * Creates a new AlignTargetXAxis.
    */
-  public RevShooter() {
+  public AlignTargetXAxis() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.m_shooter);
+    addRequirements(Robot.m_driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    if(Robot.m_oi.isButtonPressed(Constants.XBOX_BX, false)){
-      Robot.m_shooter.ShooterSpeed(Constants.SHOOTER_SPEED);
-      SmartDashboard.putNumber("Shooter %", Constants.SHOOTER_SPEED);
-    }
-    if(Robot.m_oi.isButtonReleased(Constants.XBOX_BX, false)){
-      end(true);
-
-    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.m_shooter.ShooterSpeed(0);
-    SmartDashboard.putNumber("Shooter %", 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-     return false;
+    return false;
   }
-
-//PID stuff
-
-
-
-
-
 }
-
