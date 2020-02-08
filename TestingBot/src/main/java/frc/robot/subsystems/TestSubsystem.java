@@ -35,18 +35,19 @@ public class TestSubsystem extends SubsystemBase {
     NetworkTableEntry ta = table.getEntry("ta");
 
 
-    double numberator=39-53;
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
+    double numerator=39-53;
+    double horizontalOffset = tx.getDouble(0.0);
+    double verticalOffset = ty.getDouble(0.0);
     double area = ta.getDouble(0.0);
-    double denominator=Math.tan(y-.04);
+    double verticalOffsetInRadians=Math.toRadians(verticalOffset);
+    double denominator=Math.tan(verticalOffsetInRadians);
 
-    double xdistance=numberator/denominator;
+    double xdistance=numerator/denominator;
 
 
 
-    SmartDashboard.putNumber("LimelightX", x);
-    SmartDashboard.putNumber("LimelightY", y);
+    SmartDashboard.putNumber("LimelightX", horizontalOffset);
+    SmartDashboard.putNumber("LimelightY", verticalOffset);
     SmartDashboard.putNumber("LimelightArea", area);
     SmartDashboard.putNumber("Distance", xdistance);
 
