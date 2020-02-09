@@ -5,18 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
-
-
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.subsystems.Shooter;
 
 public class RevShooter extends CommandBase {
+  int counter = 0;
+
   /**
    * Creates a new RevShooter.
    */
@@ -29,15 +28,26 @@ public class RevShooter extends CommandBase {
   @Override
   public void initialize() {
 
+
   }
+  
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
     if(Robot.m_oi.isButtonPressed(Constants.XBOX_BX, false)){
+      if(Shooter.getRPM()<7500){
+        Robot.m_shooter.ShooterSpeed(Constants.SHOOTER_SPEED);
+        SmartDashboard.putNumber("ShooterSpeed", 1);
+        SmartDashboard.putNumber("Shooter RPM", Shooter.getRPM());
+
+      }
+      if(Shooter.getRPM()>=7500){
       Robot.m_shooter.ShooterSpeed(Constants.SHOOTER_SPEED);
-      SmartDashboard.putNumber("Shooter %", Constants.SHOOTER_SPEED);
+      SmartDashboard.putNumber("ShooterSpeed", Constants.SHOOTER_SPEED);
+      SmartDashboard.putNumber("Shooter RPM", Shooter.getRPM());
+
+      }
     }
     if(Robot.m_oi.isButtonReleased(Constants.XBOX_BX, false)){
       end(true);
