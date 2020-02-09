@@ -48,10 +48,12 @@ public final class Constants {
 	*/
 	//shooter
 	public static final int XBOX_BX = 3;
-	//dsolenoid
+	//dsolenoid, gearbox
 	public static final int XBOX_BA = 1;
-	//limelight light
 	public static final int XBOX_BB = 2;
+	//distancemode
+	public static final int XBOX_BY = 4;
+
 
 	public static final int GEARBOX_PORT = 2;
 
@@ -65,6 +67,7 @@ public final class Constants {
 
 	// Constants
 	public static final double SHOOTER_SPEED=.879; //.88 for distance
+	public static final int SETRPM=7000;
 	public static final int KTIMEOUTMS = 0;
 	public static final int SHOOTER_STRIPES = 0;
 	public static final double PD_P = .8;

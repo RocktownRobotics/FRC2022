@@ -5,18 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.AutomationCommands;
+package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class AlignTargetXAxis extends CommandBase {
+public class DistanceFinder extends CommandBase {
   /**
-   * Creates a new AlignTargetXAxis.
+   * Creates a new DistanceFinder.
    */
-  public AlignTargetXAxis() {
+  private boolean longRange= true;
+  public DistanceFinder() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.m_driveTrain);
+    addRequirements(Robot.m_limeLight);
   }
 
   // Called when the command is initially scheduled.
@@ -27,6 +30,15 @@ public class AlignTargetXAxis extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(Robot.m_oi.isButtonPressed(Constants.XBOX_BY, false)){
+      longRange=!longRange;
+    }
+    SmartDashboard.putBoolean("Long Range", longRange);
+    if(longRange){
+      Robot.m_limeLight.longRange();
+    }else{
+      Robot.m_limeLight.shortRange();
+    }
   }
 
   // Called once the command ends or is interrupted.

@@ -21,7 +21,6 @@ public class Shooter extends SubsystemBase {
   private int kTimeoutMs = Constants.KTIMEOUTMS;
   private int edgesPerCycle = Constants.SHOOTER_STRIPES;
   private double maxRPM =0;
-  public int RPMcap=7900;
 
   /**
    * Creates a new Shooter.

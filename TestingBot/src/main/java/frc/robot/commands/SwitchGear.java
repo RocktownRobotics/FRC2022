@@ -31,8 +31,8 @@ public class SwitchGear extends CommandBase {
   @Override
   public void execute() {
     if(Robot.m_oi.isButtonPressed(Constants.XBOX_BA, true)){
-      //Robot.m_gearBox.changeGear(!gearState);
-      //gearState=!gearState;
+      Robot.m_gearBox.changeGear(!gearState);
+      gearState=!gearState;
     }
   }
 
