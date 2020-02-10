@@ -33,6 +33,11 @@ private boolean isDeployed;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+/*
+        IMPORTANT: ADD A BINDING
+        */
+  //if(Robot.m_oi.isButtonPressed(,false));
     if(!isDeployed){
       SmartDashboard.putBoolean("Pneumatic deployed:", isDeployed);
       Robot.m_pneumatic.extendSolenoid();
@@ -43,6 +48,7 @@ private boolean isDeployed;
       this.isDeployed=false;       
     }
   }
+//}
 
   // Called once the command ends or is interrupted.
   @Override

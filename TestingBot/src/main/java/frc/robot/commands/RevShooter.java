@@ -15,6 +15,7 @@ import frc.robot.subsystems.Shooter;
 
 public class RevShooter extends CommandBase {
   int counter = 0;
+  boolean inFullPower=true;
 
   /**
    * Creates a new RevShooter.
@@ -35,23 +36,30 @@ public class RevShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    while(Robot.m_oi.isButtonPressed(Constants.XBOX_BX, false)){
-      if(Shooter.getRPM()<Constants.SETRPM){
-        Robot.m_shooter.ShooterSpeed(Constants.SHOOTER_SPEED);
-        SmartDashboard.putNumber("ShooterSpeed", 1);
-        SmartDashboard.putNumber("Shooter RPM", Shooter.getRPM());
-
-      }
-      if(Shooter.getRPM()>=Constants.SETRPM){
-      Robot.m_shooter.ShooterSpeed(Constants.SHOOTER_SPEED);
-      SmartDashboard.putNumber("ShooterSpeed", Constants.SHOOTER_SPEED);
+    if(Robot.m_oi.isButtonPressed(Constants.XBOX_BX, false)){
       SmartDashboard.putNumber("Shooter RPM", Shooter.getRPM());
+      double exponentNumerator=-(Shooter.getRPM()+Constants.OPTIMUMRPM);
+      double exponent=exponentNumerator/Constants.RPMBUFFER;
+      double denominator=1+Math.pow(Math.E, exponent);
+      double sigmoidResult=(-1/denominator)+1;
+      SmartDashboard.putNumber("Sigmoid Result", sigmoidResult);
+      //double ShooterSpeed=sigmoidResult;
 
+      if(Shooter.getRPM()<Constants.OPTIMUMRPM){
+        inFullPower=true;
+        Robot.m_shooter.ShooterSpeed(Constants.SHOOTER_SPEED);
+        SmartDashboard.putNumber("ShooterPower", 1);
+        SmartDashboard.putBoolean("InFullPower", inFullPower);
       }
-      if(Robot.m_oi.isButtonReleased(Constants.XBOX_BX, false)){
-        end(true);
+      if(Shooter.getRPM()>=Constants.OPTIMUMRPM){
+        inFullPower=false;
+        Robot.m_shooter.ShooterSpeed(Constants.SHOOTER_SPEED);
+        SmartDashboard.putNumber("Shooterpower", Constants.SHOOTER_SPEED);
+        SmartDashboard.putBoolean("InFullPower", inFullPower);
+      }
     }
-
+    if(Robot.m_oi.isButtonReleased(Constants.XBOX_BX, false)){
+      end(true);
     }
   }
 
@@ -59,7 +67,7 @@ public class RevShooter extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Robot.m_shooter.ShooterSpeed(0);
-    SmartDashboard.putNumber("Shooter %", 0);
+    SmartDashboard.putNumber("ShooterPower", 0);
   }
 
   // Returns true when the command should end.

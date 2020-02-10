@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -21,6 +23,7 @@ public class Shooter extends SubsystemBase {
   private int kTimeoutMs = Constants.KTIMEOUTMS;
   private int edgesPerCycle = Constants.SHOOTER_STRIPES;
   private double maxRPM =0;
+  
 
   /**
    * Creates a new Shooter.
@@ -40,13 +43,13 @@ public class Shooter extends SubsystemBase {
   public static double getRPM() {
     double tachVel_UnitsPer100ms = shooter1.getSelectedSensorVelocity(0);
 
-    double tachRPM = tachVel_UnitsPer100ms * 600 / 1024;
+    double tachRPM = -tachVel_UnitsPer100ms * 600 / 1024;
 
     return tachRPM;
   }
 
   public void ShooterSpeed(double speed){
-    shooter1.set(ControlMode.PercentOutput, speed);
+    shooter1.set(ControlMode.PercentOutput, -speed);
     shooter2.set(ControlMode.PercentOutput, -speed);
   }
   @Override
@@ -56,6 +59,7 @@ public class Shooter extends SubsystemBase {
       maxRPM=Shooter.getRPM();
     }
     SmartDashboard.putNumber("MaxRPM", maxRPM);
+    SmartDashboard.putNumber("Shooter RPM", getRPM());
     setDefaultCommand(new RevShooter());
   }
 }
