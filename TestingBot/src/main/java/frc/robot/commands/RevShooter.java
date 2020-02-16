@@ -9,14 +9,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import frc.robot.PortMap;
 import frc.robot.Robot;
-import frc.robot.subsystems.Shooter;
 
 public class RevShooter extends CommandBase {
   int counter = 0;
   boolean inFullPower=true;
-
+  boolean shooterActivated=false;
   /**
    * Creates a new RevShooter.
    */
@@ -36,14 +35,21 @@ public class RevShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BX, false)){
+      shooterActivated=true;
+    }
+    if(Robot.m_oi.isButtonReleased(PortMap.XBOX_BX, false)){
+      shooterActivated=false;
+    }
+    if(shooterActivated){
+      Robot.m_shooter.pidControl();
+    }else{
+      end(false);
+    }
+
+/*
     if(Robot.m_oi.isButtonPressed(Constants.XBOX_BX, false)){
       SmartDashboard.putNumber("Shooter RPM", Shooter.getRPM());
-      double exponentNumerator=-(Shooter.getRPM()+Constants.OPTIMUMRPM);
-      double exponent=exponentNumerator/Constants.RPMBUFFER;
-      double denominator=1+Math.pow(Math.E, exponent);
-      double sigmoidResult=(-1/denominator)+1;
-      SmartDashboard.putNumber("Sigmoid Result", sigmoidResult);
-      //double ShooterSpeed=sigmoidResult;
 
       if(Shooter.getRPM()<Constants.OPTIMUMRPM){
         inFullPower=true;
@@ -61,13 +67,15 @@ public class RevShooter extends CommandBase {
     if(Robot.m_oi.isButtonReleased(Constants.XBOX_BX, false)){
       end(true);
     }
+    */
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.m_shooter.ShooterSpeed(0);
-    SmartDashboard.putNumber("ShooterPower", 0);
+    Robot.m_shooter.shooterSpeed(0);
+    SmartDashboard.putNumber("Shooter%", 0);
   }
 
   // Returns true when the command should end.

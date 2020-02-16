@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import frc.robot.PortMap;
 import frc.robot.Robot;
 
 public class CheesyDrive extends CommandBase {
@@ -30,8 +30,8 @@ public class CheesyDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftStickY = Robot.m_oi.GetDriverRawAxis(Constants.XBOX_LS_Y, true);
-    double rightStickX = -Robot.m_oi.GetDriverRawAxis(Constants.XBOX_RS_X, true);
+    double leftStickY = Robot.m_oi.GetDriverRawAxis(PortMap.XBOX_LS_Y, true);
+    double rightStickX = -Robot.m_oi.GetDriverRawAxis(PortMap.XBOX_RS_X, true);
 
     double power = leftStickY;
     double turningFactor = rightStickX;

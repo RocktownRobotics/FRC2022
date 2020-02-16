@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.PortMap;
 import frc.robot.commands.SwitchGear;
 
 public class GearBox extends SubsystemBase {
@@ -18,7 +18,7 @@ public class GearBox extends SubsystemBase {
    */
 
    //this solenoid is actually the gearbox
-  private Solenoid gearbox = new Solenoid(Constants.GEARBOX_PORT);
+  private Solenoid gearbox = new Solenoid(PortMap.GEARBOX_PORT);
 
    
 

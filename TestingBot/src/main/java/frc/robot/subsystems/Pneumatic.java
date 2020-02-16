@@ -10,16 +10,14 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.commands.ControlPneumatics;
+import frc.robot.PortMap;
 
 
 public class Pneumatic extends SubsystemBase {
   /**
    * Creates a new Pneumatic.
    */
-  DoubleSolenoid dSolenoid = new DoubleSolenoid(Constants.SOLENOID_DEPLOY,Constants.SOLENOID_RETRACT);
+  DoubleSolenoid dSolenoid = new DoubleSolenoid(PortMap.SOLENOID_DEPLOY, PortMap.SOLENOID_RETRACT);
 
   public Pneumatic() {
 

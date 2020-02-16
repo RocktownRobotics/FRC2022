@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
 
-    private XboxController driverController = new XboxController(Constants.XBOX_DRIVER_PORT);
-    private XboxController shooterController = new XboxController(Constants.XBOX_SHOOTER_PORT);
+    private XboxController driverController = new XboxController(PortMap.XBOX_DRIVER_PORT);
+    private XboxController shooterController = new XboxController(PortMap.XBOX_SUPPORT_PORT);
 
 
 

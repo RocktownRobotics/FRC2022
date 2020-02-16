@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-import java.util.ArrayList;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -16,14 +14,16 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.PortMap;
 import frc.robot.commands.RevShooter;
 public class Shooter extends SubsystemBase {
-  private static TalonSRX shooter1 = new TalonSRX(Constants.SHOOTER1_PORT);
-  private TalonSRX shooter2 = new TalonSRX(Constants.SHOOTER2_PORT);
+  private static TalonSRX shooter1 = new TalonSRX(PortMap.SHOOTER1_PORT);
+  private TalonSRX shooter2 = new TalonSRX(PortMap.SHOOTER2_PORT);
   private int kTimeoutMs = Constants.KTIMEOUTMS;
   private int edgesPerCycle = Constants.SHOOTER_STRIPES;
-  private double maxRPM =0;
-  
+  private double maxRPM = 0;
+  private static double prevVelocity = 0;
+  private static double iError = 0;
 
   /**
    * Creates a new Shooter.
@@ -40,6 +40,12 @@ public class Shooter extends SubsystemBase {
 
   }
 
+  public static double getTachVel() {
+    double tachVel = shooter1.getSelectedSensorVelocity(0);
+    return tachVel;
+
+  }
+
   public static double getRPM() {
     double tachVel_UnitsPer100ms = shooter1.getSelectedSensorVelocity(0);
 
@@ -48,10 +54,41 @@ public class Shooter extends SubsystemBase {
     return tachRPM;
   }
 
-  public void ShooterSpeed(double speed){
+  public void shooterSpeed(double speed) {
     shooter1.set(ControlMode.PercentOutput, -speed);
     shooter2.set(ControlMode.PercentOutput, -speed);
   }
+
+  public void pidControl() {
+    double designatedRPM = Constants.OPTIMUMRPM;
+    double iEngage = Constants.RPM_I_ENGAGE * 1024 / 600;
+    double designatedVelocity = designatedRPM * 1024 / 600;
+    double shooterVelocity = getTachVel();
+
+    double pError = designatedVelocity - shooterVelocity;
+    double dError = shooterVelocity - prevVelocity;
+
+    if (Math.abs(pError) < iEngage) {
+      iError += pError;
+    } else {
+      iError = 0;
+    }
+
+    double pFactor = pError * Constants.PID_P;
+    double iFactor = iError * Constants.PID_I;
+    double dfactor = dError * Constants.PID_D;
+
+    double shooterPIDSpeed = pFactor + iFactor + dfactor;
+
+    if (shooterPIDSpeed > 1) {
+      shooterPIDSpeed = 1;
+    }
+
+    shooterSpeed(shooterPIDSpeed);
+
+    prevVelocity = shooterVelocity;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

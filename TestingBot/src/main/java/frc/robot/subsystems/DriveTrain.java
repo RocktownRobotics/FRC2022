@@ -11,7 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.PortMap;
 import frc.robot.commands.CheesyDrive;
 
 public class DriveTrain extends SubsystemBase {
@@ -19,12 +19,12 @@ public class DriveTrain extends SubsystemBase {
    * Creates a new DriveTrain.
    */
 
-  private TalonSRX motorLF = new TalonSRX(Constants.MOTOR_LF_ID);
-  private TalonSRX motorLM = new TalonSRX(Constants.MOTOR_LM_ID);
-  private TalonSRX motorLR = new TalonSRX(Constants.MOTOR_LR_ID);
-  private TalonSRX motorRF = new TalonSRX(Constants.MOTOR_RF_ID);
-  private TalonSRX motorRM = new TalonSRX(Constants.MOTOR_RM_ID);
-  private TalonSRX motorRR = new TalonSRX(Constants.MOTOR_RR_ID);
+  private TalonSRX motorLF = new TalonSRX(PortMap.MOTOR_LF_ID);
+  private TalonSRX motorLM = new TalonSRX(PortMap.MOTOR_LM_ID);
+  private TalonSRX motorLR = new TalonSRX(PortMap.MOTOR_LR_ID);
+  private TalonSRX motorRF = new TalonSRX(PortMap.MOTOR_RF_ID);
+  private TalonSRX motorRM = new TalonSRX(PortMap.MOTOR_RM_ID);
+  private TalonSRX motorRR = new TalonSRX(PortMap.MOTOR_RR_ID);
   //Encoder driveEncoder = new Encoder(Constants.DRIVETRAIN_ENCODER_A,Constants.DRIVETRAIN_ENCODER_B);
 
 
