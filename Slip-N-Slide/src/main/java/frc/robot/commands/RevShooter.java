@@ -9,8 +9,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.PortMap;
 import frc.robot.Robot;
+import frc.robot.subsystems.Shooter;
 
 public class RevShooter extends CommandBase {
   int counter = 0;
@@ -26,8 +28,7 @@ public class RevShooter extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
+  public void initialize(){
 
   }
   
@@ -35,40 +36,21 @@ public class RevShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    SmartDashboard.putNumber("RPM #", Shooter.getRPM());
+
+    SmartDashboard.putNumber("RPM Graph", Shooter.getRPM());
     if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BX, false)){
       shooterActivated=true;
     }
-    if(Robot.m_oi.isButtonReleased(PortMap.XBOX_BX, false)){
-      shooterActivated=false;
-    }
-    if(shooterActivated){
-      Robot.m_shooter.pidControl();
+     if(Robot.m_oi.isButtonReleased(PortMap.XBOX_BX, false)){
+       shooterActivated=false;
+     } 
+     if(shooterActivated){
+       Robot.m_shooter.pidControl();
     }else{
-      end(false);
-    }
-
-/*
-    if(Robot.m_oi.isButtonPressed(Constants.XBOX_BX, false)){
-      SmartDashboard.putNumber("Shooter RPM", Shooter.getRPM());
-
-      if(Shooter.getRPM()<Constants.OPTIMUMRPM){
-        inFullPower=true;
-        Robot.m_shooter.ShooterSpeed(Constants.SHOOTER_SPEED);
-        SmartDashboard.putNumber("ShooterPower", 1);
-        SmartDashboard.putBoolean("InFullPower", inFullPower);
-      }
-      if(Shooter.getRPM()>=Constants.OPTIMUMRPM){
-        inFullPower=false;
-        Robot.m_shooter.ShooterSpeed(Constants.SHOOTER_SPEED);
-        SmartDashboard.putNumber("Shooterpower", Constants.SHOOTER_SPEED);
-        SmartDashboard.putBoolean("InFullPower", inFullPower);
-      }
-    }
-    if(Robot.m_oi.isButtonReleased(Constants.XBOX_BX, false)){
       end(true);
     }
-    */
-
   }
 
   // Called once the command ends or is interrupted.

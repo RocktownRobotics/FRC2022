@@ -22,7 +22,7 @@ public class Shooter extends SubsystemBase {
   private int kTimeoutMs = Constants.KTIMEOUTMS;
   private int edgesPerCycle = Constants.SHOOTER_STRIPES;
   private double maxRPM = 0;
-  private static double prevVelocity = 0;
+  private static double prevRPM = 0;
   private static double iError = 0;
 
   /**
@@ -50,7 +50,9 @@ public class Shooter extends SubsystemBase {
     double tachVel_UnitsPer100ms = shooter1.getSelectedSensorVelocity(0);
 
     double tachRPM = -tachVel_UnitsPer100ms * 600 / 1024;
-
+    if(tachRPM>10000){
+      return(prevRPM);
+    }
     return tachRPM;
   }
 
@@ -61,12 +63,11 @@ public class Shooter extends SubsystemBase {
 
   public void pidControl() {
     double designatedRPM = Constants.OPTIMUMRPM;
-    double iEngage = Constants.RPM_I_ENGAGE * 1024 / 600;
-    double designatedVelocity = designatedRPM * 1024 / 600;
-    double shooterVelocity = getTachVel();
+    double iEngage = Constants.RPM_I_ENGAGE;
+    double shooterRPM = getRPM();
 
-    double pError = designatedVelocity - shooterVelocity;
-    double dError = shooterVelocity - prevVelocity;
+    double pError = designatedRPM - shooterRPM;
+    double dError = shooterRPM - prevRPM;
 
     if (Math.abs(pError) < iEngage) {
       iError += pError;
@@ -74,29 +75,41 @@ public class Shooter extends SubsystemBase {
       iError = 0;
     }
 
+    SmartDashboard.putNumber("pError", pError);
+    SmartDashboard.putNumber("iError", iError);
+    SmartDashboard.putNumber("dError", dError);
+
     double pFactor = pError * Constants.PID_P;
     double iFactor = iError * Constants.PID_I;
-    double dfactor = dError * Constants.PID_D;
+    double dFactor = dError * Constants.PID_D;
 
-    double shooterPIDSpeed = pFactor + iFactor + dfactor;
+    
+    SmartDashboard.putNumber("pFactor", pFactor);
+    SmartDashboard.putNumber("iFactor", iFactor);
+    SmartDashboard.putNumber("dFactor", dFactor);
 
+    double shooterPIDSpeed = pFactor + iFactor + dFactor;
+
+    SmartDashboard.putNumber("Shooter %", shooterPIDSpeed);
     if (shooterPIDSpeed > 1) {
       shooterPIDSpeed = 1;
     }
 
     shooterSpeed(shooterPIDSpeed);
 
-    prevVelocity = shooterVelocity;
+    prevRPM = shooterRPM;
+  }
+
+  public static boolean spinnerReady(){
+    if(getRPM()<Constants.OPTIMUMRPM+Constants.RPMBUFFER&&getRPM()>Constants.OPTIMUMRPM-Constants.RPMBUFFER){
+      return true;
+    }
+    return false;
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if(Shooter.getRPM()>maxRPM){
-      maxRPM=Shooter.getRPM();
-    }
-    SmartDashboard.putNumber("MaxRPM", maxRPM);
-    SmartDashboard.putNumber("Shooter RPM", getRPM());
     setDefaultCommand(new RevShooter());
   }
 }

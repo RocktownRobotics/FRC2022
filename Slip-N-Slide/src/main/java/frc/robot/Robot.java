@@ -9,11 +9,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.GearBox;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Spinner;
 import frc.robot.subsystems.Pneumatic;
 import frc.robot.subsystems.nonhardware.LimeLight;
 
@@ -33,6 +35,7 @@ public class Robot extends TimedRobot {
   public static Pneumatic m_pneumatic = new Pneumatic();
   public static GearBox m_gearBox = new GearBox();
   public static LimeLight m_limeLight = new LimeLight();
+  public static Spinner m_spinner = new Spinner();
  
   public static final AnalogInput m_ultrasonic = new AnalogInput(Constants.ANALOGPORT);
 
@@ -70,6 +73,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+
   }
 
   @Override

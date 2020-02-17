@@ -38,16 +38,23 @@ public final class Constants {
 //Shooter config
 
 	//Default Shooter Speed
-		public static final double SHOOTER_SPEED=.8825; //.88 for distance
+		public static final double SHOOTER_SPEED=.88; //.88 for distance
 	
 	//Optimum Shooting RPM
-		public static final int OPTIMUMRPM=7000;
+		public static final int OPTIMUMRPM=8600;
+		public static final int RPMBUFFER = 100;
 
 	//PID
-		public static final double PID_P = 0;
+		public static final double PID_P = .11;//.0045 min 
 		public static final double PID_I = 0;
-		public static final double PID_D = 0;
+		public static final double PID_D = .08;
 		public static final double RPM_I_ENGAGE = 250;
 //
+
+//--------------------------------------------------------------------------------------------------------//
+
+//Spinner config
+
+	public static final double SPINNER_SPEED = 1;
 
 }
