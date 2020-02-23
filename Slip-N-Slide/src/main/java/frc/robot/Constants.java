@@ -65,5 +65,11 @@ public final class Constants {
 
 	public static final double SPINNER_SPEED = 1;
 
+	
+//--------------------------------------------------------------------------------------------------------//
+
+//Drive configs
+
+	public static final double JOYSTICK_BUFFER = .1;
 
 }
