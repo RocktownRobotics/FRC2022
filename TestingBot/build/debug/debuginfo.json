@@ -1,0 +1,23 @@
+[
+  {
+    "artifact": "frcJava (in project TestBot_V2)",
+    "target": "roborio",
+    "debugfile": "frcJava_roborio.debugconfig",
+    "project": "TestBot_V2",
+    "language": "java"
+  },
+  {
+    "artifact": "frcJava (in project TestingBot)",
+    "target": "roborio",
+    "debugfile": "frcJava_roborio.debugconfig",
+    "project": "TestingBot",
+    "language": "java"
+  },
+  {
+    "artifact": "frcJava (in project Testingtestingbot)",
+    "target": "roborio",
+    "debugfile": "frcJava_roborio.debugconfig",
+    "project": "Testingtestingbot",
+    "language": "java"
+  }
+]

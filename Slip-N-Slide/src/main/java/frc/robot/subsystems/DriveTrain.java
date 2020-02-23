@@ -39,6 +39,11 @@ public class DriveTrain extends SubsystemBase {
     motorRM.set(ControlMode.PercentOutput, speed);
     motorRR.set(ControlMode.PercentOutput, speed);
   }
+  public void setBothMotors(double speed){
+    setRightMotors(speed);
+    setLeftMotors(speed);
+  }
+
 /* 
   public double getDriveEncoderCount() {
 		return driveEncoder.get();

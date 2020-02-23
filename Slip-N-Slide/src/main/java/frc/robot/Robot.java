@@ -9,7 +9,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveTrain;
@@ -32,7 +31,7 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain m_driveTrain = new DriveTrain();
   public static Shooter m_shooter = new Shooter();
-  public static Pneumatic m_pneumatic = new Pneumatic();
+  //public static Pneumatic m_pneumatic = new Pneumatic();
   public static GearBox m_gearBox = new GearBox();
   public static LimeLight m_limeLight = new LimeLight();
   public static Spinner m_spinner = new Spinner();

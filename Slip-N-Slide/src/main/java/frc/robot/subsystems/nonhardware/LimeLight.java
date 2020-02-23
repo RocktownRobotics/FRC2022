@@ -29,6 +29,7 @@ public class LimeLight extends SubsystemBase {
   boolean light = false;
   int testcounter=0;
   boolean strobeMode=false;
+  double feetDecimal = 0;
 
   public LimeLight() {
 
@@ -65,6 +66,7 @@ public class LimeLight extends SubsystemBase {
       double correctedxdistance = AvgDistance * ratio;
       // Converting raw inches to feet/inches
       double feet = correctedxdistance / 12;
+      feetDecimal = feet;
       feet = (int) feet;
       double inches = correctedxdistance - (feet * 12);
       inches *= 100;
@@ -106,6 +108,16 @@ public class LimeLight extends SubsystemBase {
   public void lightOff() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
 
+  }
+  
+  public double getXOffset(){
+    NetworkTableEntry offset = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx");
+    double offSetDouble = offset.getDouble(0.0);
+    return offSetDouble;
+  }
+
+  public double getDistance(){
+    return feetDecimal;
   }
 
   @Override

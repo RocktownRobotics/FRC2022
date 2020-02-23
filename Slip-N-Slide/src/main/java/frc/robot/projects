@@ -1,1 +1,29 @@
-Richard - auto-aligning, autonomous, encoders, pid
+Current state:
+PID - Disabled
+Shooter method: raw percent
+
+Works:
+    Shooter
+    Distance
+
+Nervous:
+    Drivetrain
+    Gearbox
+
+Untested:
+    Target alignment
+    Color wheel
+
+
+
+Plan for tmrw:
+
+1) Test drivetrain
+2) Test gearbox
+3) Test distance alignment
+4) Test angle alignment
+5) Ensure that we have a working robot
+6) Ensure that we have a working robot
+7) Ensure that we have a working robot
+8) Experiment with PID
+9) Autonomous

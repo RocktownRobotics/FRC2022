@@ -12,18 +12,20 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.PortMap;
+import frc.robot.Robot;
+import frc.robot.commands.AlignToTarget;
 import frc.robot.commands.RevShooter;
 public class Shooter extends SubsystemBase {
   private static TalonSRX shooter1 = new TalonSRX(PortMap.SHOOTER1_PORT);
   private TalonSRX shooter2 = new TalonSRX(PortMap.SHOOTER2_PORT);
   private int kTimeoutMs = Constants.KTIMEOUTMS;
   private int edgesPerCycle = Constants.SHOOTER_STRIPES;
-  private double maxRPM = 0;
   private static double prevRPM = 0;
-  private static double iError = 0;
 
   /**
    * Creates a new Shooter.
@@ -63,32 +65,24 @@ public class Shooter extends SubsystemBase {
 
   public void pidControl() {
     double designatedRPM = Constants.OPTIMUMRPM;
-    double iEngage = Constants.RPM_I_ENGAGE;
     double shooterRPM = getRPM();
 
     double pError = designatedRPM - shooterRPM;
     double dError = shooterRPM - prevRPM;
 
-    if (Math.abs(pError) < iEngage) {
-      iError += pError;
-    } else {
-      iError = 0;
-    }
+  
 
     SmartDashboard.putNumber("pError", pError);
-    SmartDashboard.putNumber("iError", iError);
     SmartDashboard.putNumber("dError", dError);
 
     double pFactor = pError * Constants.PID_P;
-    double iFactor = iError * Constants.PID_I;
     double dFactor = dError * Constants.PID_D;
 
     
     SmartDashboard.putNumber("pFactor", pFactor);
-    SmartDashboard.putNumber("iFactor", iFactor);
     SmartDashboard.putNumber("dFactor", dFactor);
 
-    double shooterPIDSpeed = pFactor + iFactor + dFactor;
+    double shooterPIDSpeed = pFactor + dFactor;
 
     SmartDashboard.putNumber("Shooter %", shooterPIDSpeed);
     if (shooterPIDSpeed > 1) {
@@ -100,16 +94,13 @@ public class Shooter extends SubsystemBase {
     prevRPM = shooterRPM;
   }
 
-  public static boolean spinnerReady(){
-    if(getRPM()<Constants.OPTIMUMRPM+Constants.RPMBUFFER&&getRPM()>Constants.OPTIMUMRPM-Constants.RPMBUFFER){
-      return true;
-    }
-    return false;
-  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BB,true)){
+      CommandScheduler.getInstance().schedule(new AlignToTarget());
+    }
     setDefaultCommand(new RevShooter());
   }
 }

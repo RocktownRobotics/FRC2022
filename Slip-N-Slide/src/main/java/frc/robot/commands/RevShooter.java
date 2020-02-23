@@ -47,7 +47,8 @@ public class RevShooter extends CommandBase {
        shooterActivated=false;
      } 
      if(shooterActivated){
-       Robot.m_shooter.pidControl();
+       //Robot.m_shooter.pidControl();
+       Robot.m_shooter.shooterSpeed(Constants.SHOOTER_SPEED);
     }else{
       end(true);
     }

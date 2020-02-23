@@ -57,11 +57,11 @@ public class PortMap {
     //Support - Extend Pneumatic
 	public static final int XBOX_BA = 1;
 
-    //Driver - FREE
+    //Driver - Align Angle
     //Support - Retract Pneumatic
     public static final int XBOX_BB = 2;
 
-    //Driver - FREE
+    //Driver - Align Distance
     //Support - Shooter
 	public static final int XBOX_BX = 3;
 

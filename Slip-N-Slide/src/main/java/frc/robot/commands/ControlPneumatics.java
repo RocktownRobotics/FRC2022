@@ -17,7 +17,7 @@ public class ControlPneumatics extends CommandBase {
    */
   public ControlPneumatics() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.m_pneumatic);
+    //addRequirements(Robot.m_pneumatic);
   }
 
 private boolean isDeployed;
@@ -39,11 +39,11 @@ private boolean isDeployed;
   //if(Robot.m_oi.isButtonPressed(,false));
     if(!isDeployed){
       SmartDashboard.putBoolean("Pneumatic deployed:", isDeployed);
-      Robot.m_pneumatic.extendSolenoid();
+      //Robot.m_pneumatic.extendSolenoid();
       this.isDeployed=true;
     }else{
       SmartDashboard.putBoolean("Pneumatic deployed:", isDeployed);
-      Robot.m_pneumatic.retractSolenoid();
+      //Robot.m_pneumatic.retractSolenoid();
       this.isDeployed=false;       
     }
   }
