@@ -15,8 +15,7 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Shooter;
 
 public class RevShooter extends CommandBase {
-  int counter = 0;
-  boolean inFullPower=true;
+
   boolean shooterActivated=false;
   /**
    * Creates a new RevShooter.
@@ -41,11 +40,8 @@ public class RevShooter extends CommandBase {
 
     SmartDashboard.putNumber("RPM Graph", Shooter.getRPM());
     if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BX, false)){
-      shooterActivated=true;
+      shooterActivated=!shooterActivated;
     }
-     if(Robot.m_oi.isButtonReleased(PortMap.XBOX_BX, false)){
-       shooterActivated=false;
-     } 
      if(shooterActivated){
        //Robot.m_shooter.pidControl();
        Robot.m_shooter.shooterSpeed(Constants.SHOOTER_SPEED);
@@ -67,7 +63,6 @@ public class RevShooter extends CommandBase {
      return false;
   }
 
-//PID stuff
 
 
 

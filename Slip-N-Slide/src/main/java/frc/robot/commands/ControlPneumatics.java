@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.PortMap;
 import frc.robot.Robot;
 
 public class ControlPneumatics extends CommandBase {
@@ -17,15 +18,16 @@ public class ControlPneumatics extends CommandBase {
    */
   public ControlPneumatics() {
     // Use addRequirements() here to declare subsystem dependencies.
-    //addRequirements(Robot.m_pneumatic);
+    addRequirements(Robot.m_pneumatic);
   }
 
-private boolean isDeployed;
+private boolean isDeployed = false;
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     this.isDeployed = false;
+    Robot.m_pneumatic.retractSolenoid();
 
   }
 
@@ -33,19 +35,26 @@ private boolean isDeployed;
   @Override
   public void execute() {
 
-/*
-        IMPORTANT: ADD A BINDING
-        */
-  //if(Robot.m_oi.isButtonPressed(,false));
-    if(!isDeployed){
-      SmartDashboard.putBoolean("Pneumatic deployed:", isDeployed);
-      //Robot.m_pneumatic.extendSolenoid();
-      this.isDeployed=true;
-    }else{
-      SmartDashboard.putBoolean("Pneumatic deployed:", isDeployed);
-      //Robot.m_pneumatic.retractSolenoid();
-      this.isDeployed=false;       
-    }
+
+       
+  if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BB,false)){
+    this.isDeployed = true;
+    Robot.m_pneumatic.extendSolenoid();
+  }
+
+  if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BA, false)){
+    this.isDeployed = false;
+    Robot.m_pneumatic.retractSolenoid();
+  }
+    SmartDashboard.putBoolean("Pneumatic deployed", this.isDeployed);
+    // if(isDeployed){
+    //   Robot.m_pneumatic.retractSolenoid();
+    //   this.isDeployed=false;
+    // }else{
+    //   Robot.m_pneumatic.extendSolenoid();
+    //   this.isDeployed = true;
+    //}
+    
   }
 //}
 

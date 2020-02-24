@@ -16,17 +16,17 @@ public class PortMap {
 
 //TalonSRX's
 	//Wheels
-	public static final int MOTOR_LF_ID = 300;//3
-	public static final int MOTOR_LM_ID = 200;//2
-	public static final int MOTOR_LR_ID = 100;//1
+	public static final int MOTOR_LF_ID = 3;
+	public static final int MOTOR_LM_ID = 2;
+	public static final int MOTOR_LR_ID = 1;
 	public static final int MOTOR_RF_ID = 6;
 	public static final int MOTOR_RM_ID = 5;
 	public static final int MOTOR_RR_ID = 4;
     //Shooters
-	public static final int SHOOTER1_PORT = 1;//7
-    public static final int SHOOTER2_PORT = 2;//8
+	public static final int SHOOTER1_PORT = 7; 
+    public static final int SHOOTER2_PORT = 8;//(vector)
     //Spinner
-    public static final int SPINNER_PORT = 3;//9
+    public static final int SPINNER_PORT = 9;
     //Color Wheel
     public static final int COLORWHEEL_PORT = 10;
 //
@@ -43,7 +43,7 @@ public class PortMap {
 
 //Axis Ports
     //Left Stick
-	public static final int XBOX_LS_X = 0;
+    public static final int XBOX_LS_X = 0; //Color wheel
     public static final int XBOX_LS_Y = 1;
     //Right Stick
 	public static final int XBOX_RS_X = 4;
@@ -54,18 +54,18 @@ public class PortMap {
 
 //Button Ports and Functions
     //Driver - Gearbox
-    //Support - Extend Pneumatic
+    //Support - Retract Pneumatic
 	public static final int XBOX_BA = 1;
 
-    //Driver - Align Angle
-    //Support - Retract Pneumatic
+    //Driver - Open
+    //Support - Extend Pneumatic
     public static final int XBOX_BB = 2;
 
-    //Driver - Align Distance
+    //Driver - Open
     //Support - Shooter
 	public static final int XBOX_BX = 3;
 
-    //Driver - Distance Mode
+    //Driver - Align to target
     //Support - Spinner
 	public static final int XBOX_BY = 4;
 //
@@ -73,7 +73,7 @@ public class PortMap {
 //--------------------------------------------------------------------------------------------------------//
 
 //Gearbox
-    public static final int GEARBOX_PORT = 2;
+    public static final int GEARBOX_PORT = 0;
 //
 
 //--------------------------------------------------------------------------------------------------------//
@@ -81,7 +81,7 @@ public class PortMap {
 //Solenoids/Double Solenoids
     
     //Double Solenoids
-	public static final int SOLENOID_DEPLOY = 0;
+	public static final int SOLENOID_DEPLOY = 2;
     public static final int SOLENOID_RETRACT = 1;
     
 //

@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.GearBox;
 import frc.robot.subsystems.Shooter;
@@ -31,10 +33,11 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain m_driveTrain = new DriveTrain();
   public static Shooter m_shooter = new Shooter();
-  //public static Pneumatic m_pneumatic = new Pneumatic();
+  public static Pneumatic m_pneumatic = new Pneumatic();
   public static GearBox m_gearBox = new GearBox();
   public static LimeLight m_limeLight = new LimeLight();
   public static Spinner m_spinner = new Spinner();
+  public static ColorWheel m_colorWheel = new ColorWheel();
  
   public static final AnalogInput m_ultrasonic = new AnalogInput(Constants.ANALOGPORT);
 

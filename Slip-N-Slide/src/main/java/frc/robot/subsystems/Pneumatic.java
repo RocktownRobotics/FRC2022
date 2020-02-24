@@ -11,9 +11,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.PortMap;
+import frc.robot.commands.ControlPneumatics;
 
 
 public class Pneumatic extends SubsystemBase {
+  private static boolean isDeployed = false;
   /**
    * Creates a new Pneumatic.
    */
@@ -22,13 +24,18 @@ public class Pneumatic extends SubsystemBase {
   public Pneumatic() {
 
   }
+  public static boolean isDeployed(){
+    return isDeployed;
+  }
 
   public void extendSolenoid(){
     dSolenoid.set(Value.kForward);
+    isDeployed = true;
   }
   
   public void retractSolenoid(){
     dSolenoid.set(Value.kReverse);
+    isDeployed = false;
   }
   public void stopSolenoid(){
     dSolenoid.set(Value.kOff);
@@ -37,6 +44,6 @@ public class Pneumatic extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //setDefaultCommand(new ControlPneumatics());   
+    setDefaultCommand(new ControlPneumatics());   
   }
 }

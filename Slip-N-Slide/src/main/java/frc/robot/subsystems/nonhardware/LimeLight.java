@@ -43,7 +43,7 @@ public class LimeLight extends SubsystemBase {
     if (isTarget == 1) {
       NetworkTableEntry ty = table.getEntry("ty");
       // trig
-      double numerator = 92 - 21.5;
+      double numerator = 98 - 21.125;
       double verticalOffset = ty.getDouble(0.0);
       double verticalOffsetInRadians = Math.toRadians(verticalOffset);
       double denominator = Math.tan(verticalOffsetInRadians);
@@ -88,6 +88,7 @@ public class LimeLight extends SubsystemBase {
       counter++;
     }
   }
+
 
   public void shortRange(){
     lightOff();

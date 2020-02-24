@@ -28,11 +28,6 @@ public class SpinSpinner extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //if (Shooter.spinnerReady()) {
-      //Robot.m_spinner.engageSpinner();
-    //}else{
-      //end(true);
-    //}
 
     if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BY, false)){
       Robot.m_spinner.engageSpinner();

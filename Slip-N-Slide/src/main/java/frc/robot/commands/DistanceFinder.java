@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.PortMap;
 import frc.robot.Robot;
@@ -16,6 +17,7 @@ public class DistanceFinder extends CommandBase {
    * Creates a new DistanceFinder.
    */
   private int limeLightState = 0;
+  private String limeLightString;
   public DistanceFinder() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.m_limeLight);
@@ -29,7 +31,7 @@ public class DistanceFinder extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BY, true)){
+      if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BB, true)){
         limeLightState++;
         if(limeLightState>2){
           limeLightState = 0;
@@ -37,11 +39,15 @@ public class DistanceFinder extends CommandBase {
       }
       if(limeLightState==0){
         Robot.m_limeLight.lightOff();
+        limeLightString = "Off";
       }else if(limeLightState==1){
         Robot.m_limeLight.longRange();
+        limeLightString = "Long Range";
       }else if(limeLightState==2){
         Robot.m_limeLight.shortRange();
+        limeLightString = "Short Range";
       }
+      SmartDashboard.putString("LimeLight mode", limeLightString);
     }
 
   // Called once the command ends or is interrupted.

@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,7 +18,7 @@ import frc.robot.commands.SpinSpinner;
 
 public class Spinner extends SubsystemBase {
 
-  private TalonSRX spinnerMotor = new TalonSRX(PortMap.SPINNER_PORT);
+  private VictorSPX spinnerMotor = new VictorSPX(PortMap.SPINNER_PORT);
 
   /**
    * Creates a new Spinner.

@@ -10,10 +10,10 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.PortMap;
@@ -22,7 +22,8 @@ import frc.robot.commands.AlignToTarget;
 import frc.robot.commands.RevShooter;
 public class Shooter extends SubsystemBase {
   private static TalonSRX shooter1 = new TalonSRX(PortMap.SHOOTER1_PORT);
-  private TalonSRX shooter2 = new TalonSRX(PortMap.SHOOTER2_PORT);
+  private VictorSPX shooter2 = new VictorSPX(PortMap.SHOOTER2_PORT);
+
   private int kTimeoutMs = Constants.KTIMEOUTMS;
   private int edgesPerCycle = Constants.SHOOTER_STRIPES;
   private static double prevRPM = 0;
@@ -98,7 +99,7 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BB,true)){
+    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BY, true)){
       CommandScheduler.getInstance().schedule(new AlignToTarget());
     }
     setDefaultCommand(new RevShooter());
