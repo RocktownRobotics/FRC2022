@@ -25,7 +25,6 @@ public class DriveTrain extends SubsystemBase {
   private TalonSRX motorRF = new TalonSRX(PortMap.MOTOR_RF_ID);
   private TalonSRX motorRM = new TalonSRX(PortMap.MOTOR_RM_ID);
   private TalonSRX motorRR = new TalonSRX(PortMap.MOTOR_RR_ID);
-  //Encoder driveEncoder = new Encoder(Constants.DRIVETRAIN_ENCODER_A,Constants.DRIVETRAIN_ENCODER_B);
 
 
   public void setLeftMotors(double speed){
@@ -45,18 +44,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
 /* 
-  public double getDriveEncoderCount() {
-		return driveEncoder.get();
-  }
   
-  public void resetDriveEncoderCount() {
-		driveEncoder.reset();
-	}
-
-	public double getDriveEncoderDistance() {
-		double driveEncoderCountsPerFoot = 1;
-		return (getDriveEncoderCount() / (driveEncoderCountsPerFoot)) * 12;
-	}
 */
   public DriveTrain() {
 

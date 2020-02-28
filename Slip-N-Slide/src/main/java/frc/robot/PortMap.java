@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalSource;
+
 /**
  * Add your docs here.
  */
@@ -90,7 +92,11 @@ public class PortMap {
 
 //Encoders
 	public static final int DRIVETRAIN_ENCODER_A = 0;
-	public static final int DRIVETRAIN_ENCODER_B = 1;
+    public static final int DRIVETRAIN_ENCODER_B = 1;
+    
+
+	// public static final DigitalSource COLORWHEEL_ENCODER_A = 7;
+	// public static final DigitalSource COLORWHEEL_ENCODER_B = 5;
 
 //
 }

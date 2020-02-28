@@ -45,6 +45,7 @@ public class RevShooter extends CommandBase {
      if(shooterActivated){
        //Robot.m_shooter.pidControl();
        Robot.m_shooter.shooterSpeed(Constants.SHOOTER_SPEED);
+       SmartDashboard.putNumber("Shooter power", Constants.SHOOTER_SPEED);
     }else{
       end(true);
     }
