@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DigitalSource;
 
 /**
  * Add your docs here.
