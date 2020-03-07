@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.PortMap;
 import frc.robot.Robot;
@@ -30,7 +31,8 @@ public class SwitchGear extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BA, true)){
+    SmartDashboard.putBoolean("High Gear", gearState);
+    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_RIGHT_BUTTON, true)){
       Robot.m_gearBox.changeGear(!gearState);
       gearState=!gearState;
     }

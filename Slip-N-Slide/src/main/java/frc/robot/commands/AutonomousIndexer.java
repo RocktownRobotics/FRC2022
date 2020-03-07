@@ -8,19 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class AlignXAxis extends CommandBase {
-  private double offset;
-  private boolean isTarget=false;
+public class AutonomousIndexer extends CommandBase {
   /**
-   * Creates a new AlignXAxis.
+   * Creates a new AutonomousIndexer.
    */
-  public AlignXAxis() {
+  int indexCounter = 0;
+  int shots;
+  public AutonomousIndexer(int shots) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.m_driveTrain);
-    addRequirements(Robot.m_limeLight);
+    addRequirements(Robot.m_spinner);
+    this.shots=shots;
+
   }
 
   // Called when the command is initially scheduled.
@@ -31,30 +31,34 @@ public class AlignXAxis extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // while(notDone);
-    Robot.m_limeLight.lightOn();
-    isTarget=Robot.m_limeLight.targetInSight();
-    if(isTarget){
-      offset = Robot.m_limeLight.getXOffset();
-      if(offset<-Constants.SHOOTER_X_OFFSET){
-        Robot.m_driveTrain.setLeftMotors(Constants.X_ALIGN_MOTOR_SPEED);
+    int startcounter = 400;
+    int spinTime = 8;
+    int revTime = 118;
+    int cycleTime = spinTime+revTime;
+    for(int i=0;i<shots;i++){
+      if(indexCounter>startcounter
+      +(i*cycleTime)){
+        Robot.m_spinner.engageSpinner();
       }
-      if(offset>Constants.SHOOTER_X_OFFSET){
-        Robot.m_driveTrain.setRightMotors(Constants.X_ALIGN_MOTOR_SPEED);
+      if(indexCounter>startcounter+(i*cycleTime)+spinTime){
+        Robot.m_spinner.disengageSpinner();
       }
     }
+    indexCounter++;
+
+    // if(indexCounter>1200){
+    //   Robot.m_spinner.disengageSpinner();
+    // }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.m_driveTrain.setBothMotors(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean state = (offset>-Constants.SHOOTER_X_OFFSET)&&(offset<Constants.SHOOTER_X_OFFSET);
-    return state;
+    return false;
   }
 }

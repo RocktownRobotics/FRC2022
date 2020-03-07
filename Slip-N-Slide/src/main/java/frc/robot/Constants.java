@@ -46,17 +46,13 @@ public final class Constants {
 
 	//PID
 		public static final double PID_P = .11;//.0045 min 
-		public static final double PID_D = .08;
+				public static final double PID_D = .0;
 		public static final double RPM_I_ENGAGE = 250;
-
-	//X alignment
-		public static final double SHOOTER_X_OFFSET = 0.5;
-		public static final double X_ALIGN_MOTOR_SPEED = 0.05;
-
-	//Distance Alignment
+		public static final double SHOOTER_X_OFFSET = .5;
+		public static final double X_ALIGN_MOTOR_SPEED = .05;
 		public static final double SHOOTING_DISTANCE = 30;
 		public static final double SHOOTING_BUFFER = .5;
-		public static final double DISTANCE_ALIGNMENT_SPEED = .25;
+		public static final double DISTANCE_ALIGNMENT_SPEED=.25;
 //
 
 //--------------------------------------------------------------------------------------------------------//
@@ -64,12 +60,6 @@ public final class Constants {
 //Spinner config
 
 	public static final double SPINNER_SPEED = 1;
-
-	
-//--------------------------------------------------------------------------------------------------------//
-
-//Drive configs
-
-	public static final double JOYSTICK_BUFFER = .1;
+	public static final double JOYSTICK_BUFFER=.1;
 
 }

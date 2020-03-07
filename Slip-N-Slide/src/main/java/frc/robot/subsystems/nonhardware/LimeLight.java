@@ -34,6 +34,17 @@ public class LimeLight extends SubsystemBase {
   public LimeLight() {
 
   }
+  public boolean targetInSight(){
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    lightOn();
+    NetworkTableEntry tv = table.getEntry("tv");
+    double isTarget = tv.getDouble(0.0);
+    if (isTarget == 1) {
+      return true;
+    }
+    return false;
+  }
+
 
   public void longRange() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");

@@ -35,17 +35,16 @@ public class RevShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    SmartDashboard.putNumber("RPM #", Shooter.getRPM());
-
-    SmartDashboard.putNumber("RPM Graph", Shooter.getRPM());
+    SmartDashboard.putBoolean("ShooterActivated", shooterActivated);
+    Robot.m_shooter.setRPM();
     if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BX, false)){
       shooterActivated=!shooterActivated;
+      Robot.m_shooter.changeRunning();
     }
      if(shooterActivated){
        //Robot.m_shooter.pidControl();
-       Robot.m_shooter.shooterSpeed(Constants.SHOOTER_SPEED);
-       SmartDashboard.putNumber("Shooter power", Constants.SHOOTER_SPEED);
+       Robot.m_shooter.shooterSpeed(.3);
+    
     }else{
       end(true);
     }
@@ -55,7 +54,7 @@ public class RevShooter extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Robot.m_shooter.shooterSpeed(0);
-    SmartDashboard.putNumber("Shooter%", 0);
+    
   }
 
   // Returns true when the command should end.
