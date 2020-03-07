@@ -23,13 +23,18 @@ public class AutonomousDriveForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // Robot.m_limeLight.lightOff();
+    Robot.m_spinner.disengageSpinner();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     time++;
-    Robot.m_driveTrain.setBothMotors(1);
+    Robot.m_driveTrain.setBothMotors(-.60);
+    if(time>450){
+      end(true);
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -42,6 +47,6 @@ public class AutonomousDriveForward extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return time>500;
+    return time>50;
   }
 }

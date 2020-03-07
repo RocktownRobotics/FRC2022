@@ -52,7 +52,7 @@ public class PortMap {
 //--------------------------------------------------------------------------------------------------------//
 
 //Button Ports and Functions
-    //Driver - Gearbox
+    //Driver - 
     //Support - Retract Pneumatic
 	public static final int XBOX_BA = 1;
 
@@ -66,7 +66,9 @@ public class PortMap {
 
     //Driver - Align to target
     //Support - Spinner
-	public static final int XBOX_BY = 4;
+    public static final int XBOX_BY = 4;
+    //Drive - gearbox
+    public static final int XBOX_RIGHT_BUTTON = 6;
 //
 
 //--------------------------------------------------------------------------------------------------------//

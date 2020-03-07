@@ -27,6 +27,9 @@ public class Shooter extends SubsystemBase {
   private int kTimeoutMs = Constants.KTIMEOUTMS;
   private int edgesPerCycle = Constants.SHOOTER_STRIPES;
   private static double prevRPM = 0;
+  private boolean isRunning=false;
+  private int counter=0;
+  private double avgRPM=0;
 
   /**
    * Creates a new Shooter.
@@ -43,10 +46,21 @@ public class Shooter extends SubsystemBase {
 
   }
 
+
   public static double getTachVel() {
     double tachVel = shooter1.getSelectedSensorVelocity(0);
     return tachVel;
 
+  }
+  public void changeRunning() {
+    this.isRunning = !this.isRunning;
+  }
+  public boolean getIsRunning(){
+    return isRunning;
+  }
+  public void setRPM(){
+    SmartDashboard.putNumber("Shooter RPM", getRPM());
+    SmartDashboard.putNumber("RPM Graph_", getRPM());
   }
 
   public static double getRPM() {
@@ -99,9 +113,9 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BY, true)){
-      CommandScheduler.getInstance().schedule(new AlignToTarget());
-    }
+    //if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BY, true)){
+      //CommandScheduler.getInstance().schedule(new AlignToTarget());
+    //}
     setDefaultCommand(new RevShooter());
   }
 }

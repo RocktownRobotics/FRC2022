@@ -29,8 +29,8 @@ public class SpinSpinner extends CommandBase {
   @Override
   public void execute() {
 
-    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BY, false)){
-      Robot.m_spinner.engageSpinner();
+    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BY, false)&&(Robot.m_shooter.getIsRunning())){
+      new AutonomousIndexer(5);
     }if(Robot.m_oi.isButtonReleased(PortMap.XBOX_BY, false)){
       end(true);
     }
