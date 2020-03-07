@@ -97,9 +97,6 @@ public class LimeLight extends SubsystemBase {
     SmartDashboard.putNumber("Ultrasonic2", distanceInches);
   }
 
-  public void defaultLight(){
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
-  }
 
   public void lightOn() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);

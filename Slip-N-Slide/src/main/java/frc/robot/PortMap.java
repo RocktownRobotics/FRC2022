@@ -56,7 +56,7 @@ public class PortMap {
     //Support - Retract Pneumatic
 	public static final int XBOX_BA = 1;
 
-    //Driver - Open
+    //Driver - Distance
     //Support - Extend Pneumatic
     public static final int XBOX_BB = 2;
 

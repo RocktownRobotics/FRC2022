@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutonomousDriveForward;
+import frc.robot.commands.AutonomousTest;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -22,6 +23,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   private final AutonomousDriveForward m_AutoDriveForward = new AutonomousDriveForward();
+  private final AutonomousTest m_AutonomousTestCommand = new AutonomousTest();
 
 
 
@@ -50,6 +52,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_AutoDriveForward;
+    return m_AutonomousTestCommand;
   }
 }
