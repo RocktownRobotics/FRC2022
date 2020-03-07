@@ -18,7 +18,6 @@ public class AutonomousDriveForward extends CommandBase {
   public AutonomousDriveForward() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.m_driveTrain);
-    addRequirements(Robot.m_limeLight);
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +28,6 @@ public class AutonomousDriveForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_limeLight.lightOff();
     time++;
     Robot.m_driveTrain.setBothMotors(1);
   }

@@ -18,7 +18,6 @@ public class AutonomousTest extends CommandBase {
   public AutonomousTest() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.m_spinner);
-    addRequirements(Robot.m_limeLight);
   }
 
   // Called when the command is initially scheduled.
@@ -29,8 +28,6 @@ public class AutonomousTest extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_limeLight.lightOff();
-
     Robot.m_spinner.engageSpinner();
     counter++;
   }
@@ -44,6 +41,6 @@ public class AutonomousTest extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return counter>100;
+    return counter>500;
   }
 }
