@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -33,14 +34,16 @@ public class AlignXAxis extends CommandBase {
   public void execute() {
     // while(notDone);
     Robot.m_limeLight.lightOn();
+    
     isTarget=Robot.m_limeLight.targetInSight();
+    SmartDashboard.putNumber("Offset", offset);
     if(isTarget){
       offset = Robot.m_limeLight.getXOffset();
       if(offset<-Constants.SHOOTER_X_OFFSET){
-        Robot.m_driveTrain.setLeftMotors(Constants.X_ALIGN_MOTOR_SPEED);
+        Robot.m_driveTrain.setLeftMotors(-Constants.X_ALIGN_MOTOR_SPEED);
       }
       if(offset>Constants.SHOOTER_X_OFFSET){
-        Robot.m_driveTrain.setRightMotors(Constants.X_ALIGN_MOTOR_SPEED);
+        Robot.m_driveTrain.setRightMotors(-Constants.X_ALIGN_MOTOR_SPEED);
       }
     }
   }

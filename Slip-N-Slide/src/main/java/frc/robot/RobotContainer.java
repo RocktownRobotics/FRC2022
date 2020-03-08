@@ -9,6 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.AlignDistance;
+import frc.robot.commands.AlignToTarget;
+import frc.robot.commands.AutonomousIndexer;
 import frc.robot.commands.AutonomousParallel;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -21,8 +24,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  private final AutonomousParallel m_AutonomousParallel = new AutonomousParallel();
-
+  //private final AutonomousParallel m_AutonomousParallel = new AutonomousParallel();
+  //private final AutonomousIndexer m_autonomousIndexer = new AutonomousIndexer();
+  private final AlignToTarget m_AlignToTarget = new AlignToTarget();
+  //private final AlignDistance m_AlignDistance = new AlignDistance();
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -48,6 +53,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_AutonomousParallel;
+    return m_AlignToTarget;
   }
 }

@@ -13,12 +13,10 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.PortMap;
 import frc.robot.Robot;
-import frc.robot.commands.AlignToTarget;
 import frc.robot.commands.RevShooter;
 public class Shooter extends SubsystemBase {
   private static TalonSRX shooter1 = new TalonSRX(PortMap.SHOOTER1_PORT);
@@ -28,8 +26,6 @@ public class Shooter extends SubsystemBase {
   private int edgesPerCycle = Constants.SHOOTER_STRIPES;
   private static double prevRPM = 0;
   private boolean isRunning=false;
-  private int counter=0;
-  private double avgRPM=0;
 
   /**
    * Creates a new Shooter.
@@ -59,8 +55,11 @@ public class Shooter extends SubsystemBase {
     return isRunning;
   }
   public void setRPM(){
-    SmartDashboard.putNumber("Shooter RPM", getRPM());
-    SmartDashboard.putNumber("RPM Graph_", getRPM());
+    SmartDashboard.putNumber("Shooter RPM", prevRPM);
+    SmartDashboard.putNumber("RPM Graph_", prevRPM);
+    if(getRPM()>0){
+      prevRPM=getRPM();
+    }
   }
 
   public static double getRPM() {
@@ -112,10 +111,7 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    //if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BY, true)){
-      //CommandScheduler.getInstance().schedule(new AlignToTarget());
-    //}
+    //if(Robot.m_oi.isButtonPressed(PortMap, driver))
     setDefaultCommand(new RevShooter());
   }
 }

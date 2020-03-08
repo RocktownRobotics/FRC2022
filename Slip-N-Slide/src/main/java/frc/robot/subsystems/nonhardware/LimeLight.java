@@ -75,6 +75,7 @@ public class LimeLight extends SubsystemBase {
       }
       double ratio = (1.05 - 1.75 * Math.pow(10, -4) * AvgDistance  + 1.81 * Math.pow(10, -6) * AvgDistance * AvgDistance);
       double correctedxdistance = AvgDistance * ratio;
+      SmartDashboard.putNumber("Distance Inches", correctedxdistance);
       // Converting raw inches to feet/inches
       double feet = correctedxdistance / 12;
       feetDecimal = feet;
@@ -84,13 +85,9 @@ public class LimeLight extends SubsystemBase {
       inches = (int) inches;
       inches = ((double) inches) / 100;
       // Writing values to SmartDashboard
-      // SmartDashboard.putNumber("MaxD", max);
-      // SmartDashboard.putNumber("MinD", min);
-      // SmartDashboard.putNumber("AverageD", AvgDistance);
-      // SmartDashboard.putNumber("Ratio", ratio);
-      // SmartDashboard.putNumber("FinalDistance", correctedxdistance);
       SmartDashboard.putNumber("Feet", feet);
       SmartDashboard.putNumber("Inches", inches);
+      SmartDashboard.putNumber("X Offset", getXOffset());
       // resetting variables
       AvgDistance = 0;
       counter = 0;
@@ -129,7 +126,20 @@ public class LimeLight extends SubsystemBase {
   }
 
   public double getDistance(){
-    return feetDecimal;
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+
+    NetworkTableEntry tv = table.getEntry("tv");
+      NetworkTableEntry ty = table.getEntry("ty");
+      double numerator = 98 - 21.125;
+      double verticalOffset = ty.getDouble(0.0);
+      double verticalOffsetInRadians = Math.toRadians(verticalOffset);
+      double denominator = Math.tan(verticalOffsetInRadians);
+      double xdistance = numerator / denominator;
+    double ratio = (1.05 - 1.75 * Math.pow(10, -4) * xdistance  + 1.81 * Math.pow(10, -6) * xdistance * xdistance);
+    double correctedxdistance = xdistance * ratio;
+    return correctedxdistance/12;
+    
+
   }
 
   @Override

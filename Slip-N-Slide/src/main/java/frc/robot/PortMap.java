@@ -26,8 +26,6 @@ public class PortMap {
     public static final int SHOOTER2_PORT = 8;//(vector)
     //Spinner
     public static final int SPINNER_PORT = 9;
-    //Color Wheel
-    public static final int COLORWHEEL_PORT = 10;
 //
 
 //--------------------------------------------------------------------------------------------------------//
@@ -56,7 +54,7 @@ public class PortMap {
     //Support - Retract Pneumatic
 	public static final int XBOX_BA = 1;
 
-    //Driver - Open
+    //Driver - Distance
     //Support - Extend Pneumatic
     public static final int XBOX_BB = 2;
 

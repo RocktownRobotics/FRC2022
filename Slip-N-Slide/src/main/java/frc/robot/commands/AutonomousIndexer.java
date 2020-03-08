@@ -7,7 +7,10 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.PortMap;
 import frc.robot.Robot;
 
 public class AutonomousIndexer extends CommandBase {
@@ -15,40 +18,47 @@ public class AutonomousIndexer extends CommandBase {
    * Creates a new AutonomousIndexer.
    */
   int indexCounter = 0;
-  int shots;
-  public AutonomousIndexer(int shots) {
+  boolean isActivated = false;
+  int revTime=Constants.INDEX_COMMAND_REV_TIME;
+  int spinTime = Constants.INDEX_COMMAND_SPIN_TIME;
+  int cycleTime = revTime+spinTime;
+  int shot=0;
+  public AutonomousIndexer() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.m_spinner);
-    this.shots=shots;
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    indexCounter=0;
+    shot=0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int startcounter = 400;
-    int spinTime = 8;
-    int revTime = 118;
-    int cycleTime = spinTime+revTime;
-    for(int i=0;i<shots;i++){
-      if(indexCounter>startcounter
-      +(i*cycleTime)){
+    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BY, false)){
+      isActivated=!isActivated;
+      indexCounter=0;
+    }
+    if(isActivated){
+      if(indexCounter>cycleTime*shot){
         Robot.m_spinner.engageSpinner();
       }
-      if(indexCounter>startcounter+(i*cycleTime)+spinTime){
+      if(indexCounter>cycleTime*shot+spinTime){
         Robot.m_spinner.disengageSpinner();
+        shot++;
       }
+      if(shot==5){
+        isActivated=false;
+        shot=0;
+        indexCounter=0;
+      }
+      indexCounter++;
     }
-    indexCounter++;
-
-    // if(indexCounter>1200){
-    //   Robot.m_spinner.disengageSpinner();
-    // }
+    SmartDashboard.putBoolean("Spinner_Engaged", isActivated);
   }
 
   // Called once the command ends or is interrupted.

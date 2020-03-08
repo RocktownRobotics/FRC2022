@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.PortMap;
 import frc.robot.Robot;
-import frc.robot.subsystems.Shooter;
 
 public class RevShooter extends CommandBase {
+  int counter=0;
 
   boolean shooterActivated=false;
   /**
@@ -35,15 +35,17 @@ public class RevShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    counter++;
+    if(counter>Constants.TACH_GRAPH_MIN_TIME){
+      Robot.m_shooter.setRPM();
+    }
     SmartDashboard.putBoolean("ShooterActivated", shooterActivated);
-    Robot.m_shooter.setRPM();
     if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BX, false)){
       shooterActivated=!shooterActivated;
       Robot.m_shooter.changeRunning();
     }
      if(shooterActivated){
-       //Robot.m_shooter.pidControl();
-       Robot.m_shooter.shooterSpeed(.3);
+       Robot.m_shooter.shooterSpeed(Constants.SHOOTER_SPEED);
     
     }else{
       end(true);

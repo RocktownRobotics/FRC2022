@@ -19,6 +19,6 @@ public class AutonomousParallel extends ParallelCommandGroup {
   public AutonomousParallel() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new AutonomousShooter(),new AutonomousDriveForward(),new AutonomousIndexer(3));
+    super(new AutonomousShooter(),new AutonomousDriveForward(),new AutonomousIndexer());
   }
 }

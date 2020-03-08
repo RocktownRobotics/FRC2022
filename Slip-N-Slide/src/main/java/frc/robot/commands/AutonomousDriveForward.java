@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class AutonomousDriveForward extends CommandBase {
@@ -31,8 +32,8 @@ public class AutonomousDriveForward extends CommandBase {
   @Override
   public void execute() {
     time++;
-    Robot.m_driveTrain.setBothMotors(-.60);
-    if(time>450){
+    Robot.m_driveTrain.setBothMotors(Constants.AUTONOMOUS_DRIVE_SPEED);
+    if(time>Constants.AUTONOMOUS_DRIVE_TIME){
       end(true);
     }
   }
@@ -46,7 +47,6 @@ public class AutonomousDriveForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
-    return time>50;
+    return false;
   }
 }

@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.DisabledInitCommand;
-import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.GearBox;
 import frc.robot.subsystems.Shooter;
@@ -37,8 +35,6 @@ public class Robot extends TimedRobot {
   public static GearBox m_gearBox = new GearBox();
   public static LimeLight m_limeLight = new LimeLight();
   public static Spinner m_spinner = new Spinner();
-  public static ColorWheel m_colorWheel = new ColorWheel();
-  public static DisabledInitCommand m_DisabledInitCommand = new DisabledInitCommand();
 
   public static final AnalogInput m_ultrasonic = new AnalogInput(Constants.ANALOGPORT);
 
@@ -53,7 +49,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     m_oi = new OI();
-    // Robot.m_limeLight.lightOff();
+    Robot.m_limeLight.lightOn();
   }
 
   /**
@@ -70,6 +66,8 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    Robot.m_limeLight.longRange();
+
   }
 
   /**

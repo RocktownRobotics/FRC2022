@@ -19,6 +19,12 @@ package frc.robot;
 public final class Constants {
 
 //--------------------------------------------------------------------------------------------------------//
+//Autonomous
+public static final double AUTONOMOUS_SHOOTER_SPEED = .82;
+public static final double AUTONOMOUS_DRIVE_SPEED = -.6;
+public static final int AUTONOMOUS_DRIVE_TIME = 450;
+
+//--------------------------------------------------------------------------------------------------------//
 
 //Sensors
 
@@ -48,11 +54,13 @@ public final class Constants {
 		public static final double PID_P = .11;//.0045 min 
 				public static final double PID_D = .0;
 		public static final double RPM_I_ENGAGE = 250;
-		public static final double SHOOTER_X_OFFSET = .5;
-		public static final double X_ALIGN_MOTOR_SPEED = .05;
+		public static final double SHOOTER_X_OFFSET = .1;
+		public static final double X_ALIGN_MOTOR_SPEED = .25;
+	
+	//distance config
 		public static final double SHOOTING_DISTANCE = 30;
 		public static final double SHOOTING_BUFFER = .5;
-		public static final double DISTANCE_ALIGNMENT_SPEED=.25;
+		public static final double DISTANCE_ALIGNMENT_SPEED=.35;
 //
 
 //--------------------------------------------------------------------------------------------------------//
@@ -60,6 +68,12 @@ public final class Constants {
 //Spinner config
 
 	public static final double SPINNER_SPEED = 1;
-	public static final double JOYSTICK_BUFFER=.1;
+	public static final double JOYSTICK_BUFFER= .1;
+
+	public static final int INDEX_COMMAND_START_TIME = 400;
+	public static final int INDEX_COMMAND_SPIN_TIME = 10;
+	public static final int INDEX_COMMAND_REV_TIME = 200;
+	public static final int TACH_GRAPH_MIN_TIME = 415;
+
 
 }
