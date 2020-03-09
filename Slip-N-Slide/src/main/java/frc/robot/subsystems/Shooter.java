@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.PortMap;
 import frc.robot.Robot;
+import frc.robot.commands.AlignToTarget;
 import frc.robot.commands.RevShooter;
 public class Shooter extends SubsystemBase {
   private static TalonSRX shooter1 = new TalonSRX(PortMap.SHOOTER1_PORT);
@@ -26,6 +27,7 @@ public class Shooter extends SubsystemBase {
   private int edgesPerCycle = Constants.SHOOTER_STRIPES;
   private static double prevRPM = 0;
   private boolean isRunning=false;
+  //private final AlignToTarget m_alignToTarget = new AlignToTarget();
 
   /**
    * Creates a new Shooter.
@@ -74,7 +76,7 @@ public class Shooter extends SubsystemBase {
 
   public void shooterSpeed(double speed) {
     shooter1.set(ControlMode.PercentOutput, -speed);
-    shooter2.set(ControlMode.PercentOutput, -speed);
+    shooter2.set(ControlMode.PercentOutput, speed);
   }
 
   public void pidControl() {
@@ -111,7 +113,9 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    //if(Robot.m_oi.isButtonPressed(PortMap, driver))
+    if(Robot.m_oi.isButtonPressed(PortMap.XBOX_BY, true)){
+     // m_alignToTarget.schedule();
+    }
     setDefaultCommand(new RevShooter());
   }
 }

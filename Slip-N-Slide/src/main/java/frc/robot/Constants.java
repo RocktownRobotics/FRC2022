@@ -54,11 +54,11 @@ public static final int AUTONOMOUS_DRIVE_TIME = 450;
 		public static final double PID_P = .11;//.0045 min 
 				public static final double PID_D = .0;
 		public static final double RPM_I_ENGAGE = 250;
-		public static final double SHOOTER_X_OFFSET = .1;
-		public static final double X_ALIGN_MOTOR_SPEED = .25;
+		public static final double SHOOTER_X_OFFSET = .05;
+		public static final double X_ALIGN_MOTOR_SPEED = .2;
 	
 	//distance config
-		public static final double SHOOTING_DISTANCE = 30;
+		public static final double SHOOTING_DISTANCE = 20;
 		public static final double SHOOTING_BUFFER = .5;
 		public static final double DISTANCE_ALIGNMENT_SPEED=.35;
 //

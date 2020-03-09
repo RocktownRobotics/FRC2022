@@ -23,7 +23,7 @@ public class PortMap {
 	public static final int MOTOR_RR_ID = 4;
     //Shooters
 	public static final int SHOOTER1_PORT = 7; 
-    public static final int SHOOTER2_PORT = 8;//(vector)
+    public static final int SHOOTER2_PORT = 8 ;//(vector)
     //Spinner
     public static final int SPINNER_PORT = 9;
 //

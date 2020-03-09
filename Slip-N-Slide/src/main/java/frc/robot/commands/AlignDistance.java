@@ -19,6 +19,7 @@ public class AlignDistance extends CommandBase {
   private double minDistance = Constants.SHOOTING_DISTANCE-Constants.SHOOTING_BUFFER;
   private double maxDistance = Constants.SHOOTING_DISTANCE+Constants.SHOOTING_BUFFER;
   private int counter=0;
+  private boolean done=false;
   /**
    * Creates a new AlignDistance.
    */
@@ -36,6 +37,7 @@ public class AlignDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(!done){
     double distance=Robot.m_limeLight.getDistance();
     SmartDashboard.putNumber("fjdiufjuaf", distance);
     if(distance<minDistance){
@@ -45,8 +47,12 @@ public class AlignDistance extends CommandBase {
       Robot.m_driveTrain.setBothMotors(Constants.DISTANCE_ALIGNMENT_SPEED);
     }
     if(distance>minDistance&&distance<maxDistance){
-      end(false);
+      done=true;
     }
+  }else{
+    Robot.m_driveTrain.setBothMotors(0);
+    end(false);
+  }
   }
 
   // Called once the command ends or is interrupted.

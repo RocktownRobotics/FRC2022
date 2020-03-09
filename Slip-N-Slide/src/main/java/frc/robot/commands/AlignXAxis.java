@@ -15,6 +15,7 @@ import frc.robot.Robot;
 public class AlignXAxis extends CommandBase {
   private double offset;
   private boolean isTarget=false;
+  private boolean finished = false;
   /**
    * Creates a new AlignXAxis.
    */
@@ -44,6 +45,10 @@ public class AlignXAxis extends CommandBase {
       }
       if(offset>Constants.SHOOTER_X_OFFSET){
         Robot.m_driveTrain.setRightMotors(-Constants.X_ALIGN_MOTOR_SPEED);
+      }
+      if((offset>-Constants.SHOOTER_X_OFFSET)&&(offset<Constants.SHOOTER_X_OFFSET)){
+        Robot.m_driveTrain.setBothMotors(0);
+        end(false);
       }
     }
   }
